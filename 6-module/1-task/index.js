@@ -1,12 +1,11 @@
 export default class UserTable {
   constructor(rows) {
-    this.elem = render(rows);
+    this.elem = this.render(rows);
   }
-}
-function render(rows) {
-  const table = document.createElement("table");
-  table.innerHTML = `
-  <thead>
+  render(rows) {
+    const table = document.createElement("table");
+    table.innerHTML = `
+    <thead>
         <tr>
             <th>Имя</th>
             <th>Возраст</th>
@@ -16,19 +15,22 @@ function render(rows) {
         </tr>
     </thead>
     <tbody>
-        ${rows.map((row) => {
-            return `<tr>
-  <td>${row.name}</td>
-  <td>${row.age}</td>
-  <td>${row.salary}</td>
-  <td>${row.city}</td>
-  <td><button>X</button></td>
-</tr>`;}).join("")}
+        ${rows.map((row) => {return `
+        <tr>
+            <td>${row.name}</td>
+            <td>${row.age}</td>
+            <td>${row.salary}</td>
+            <td>${row.city}</td>
+            <td><button>X</button></td>
+        </tr>`;}).join("")}
     </tbody>`;
-  const buttons = table.querySelectorAll("button");
-  for (const button of buttons) {
-    button.addEventListener('click', (event) =>
-      event.target.closest("tr").remove());
+    table.addEventListener("click", this.onClick);
+    return table;
   }
-  return table;
+
+  onClick(event) {
+    if (event.target.tagName === "BUTTON") {
+      event.target.closest("tr").remove();
+    }
+  }
 }
