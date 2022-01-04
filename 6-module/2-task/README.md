@@ -85,10 +85,7 @@ get elem() {
 А именно, при клике пользователя по кнопке с классом `card__button` генерировать пользовательское событие на корневом HTML элементе компонента (который хранится в свойстве `elem`), такого вида: 
 
 ```js
-new CustomEvent("product-add", { // имя события должно быть именно "product-add"
-    detail: this.product.id, // Уникальный идентификатора товара из объекта товара
-    bubbles: true // это событие всплывает - это понадобится в дальнейшем
-}
+new CustomEvent("product-add", {detail: this.product.id,bubbles: true}
 ```
 
 Про пользовательские события можно прочитать в статье - [Генерация пользовательских событий](https://learn.javascript.ru/dispatch-events).
