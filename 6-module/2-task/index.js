@@ -3,9 +3,10 @@ export default class ProductCard {
   constructor(product) {
     this.product = product;
     this.elem = this.render();
+    this.elem.querySelector('.card__button').addEventListener("click",()=>this.onClick());
   }
   render() {
-        const card = createElement(`
+        return createElement(`
     <div class="card">
     <div class="card__top">
     <img src="/assets/images/products/${this.product.image}" class="card__image" alt="product">
@@ -19,8 +20,6 @@ export default class ProductCard {
     </div>
     </div>
     `);
-    card.querySelector(".card__button").addEventListener("click",()=>this.onClick());
-    return card;
   }
   onClick() {
     const event = new CustomEvent("product-add", { detail: this.product.id, bubbles: true });
